@@ -16,6 +16,7 @@ import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/redux/features/authSlice";
 import { toast } from "sonner";
 
+// eslint-disable-next-line react/prop-types
 const UpdateProfileDialog = ({ open, setOpen }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useSelector(store=>store.auth);
