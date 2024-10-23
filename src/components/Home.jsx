@@ -3,8 +3,10 @@ import Footer from "./shared/Footer"
 import HeroSection from "./pages/HeroSection"
 import LatestJobs from "./pages/LatestJobs"
 import Navbar from "./shared/Navbar"
+import useGetAllJobs from "./hooks/useGetAllJobs"
 
 const Home = () => {
+  useGetAllJobs();
   return (
     <div>
         <Navbar/>
