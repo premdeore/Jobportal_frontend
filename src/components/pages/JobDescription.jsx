@@ -43,8 +43,8 @@ const JobDescription = () => {
 
             if(res.data.success){
                 dispatch(setSingleJob(res.data.job));
-                // setIsApplied(res.data.job.applications.some(application=>application.applicant === user?._id))// Ensure state is in sync with data
-                setIsApplied(res.data.isApplied);
+                setIsApplied(res.data.job.applications.some(application=>application.applicant === user?._id))// Ensure state is in sync with data
+                // setIsApplied(res.data.isApplied);
             }
         } catch (error) {
             console.log(error);
