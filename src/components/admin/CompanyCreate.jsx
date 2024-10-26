@@ -10,6 +10,7 @@ import { COMPANY_API_END_POINT } from "@/utils/constant"
 import { useState } from "react"
 import { toast } from "sonner"
 import { useDispatch } from "react-redux"
+import { setSingleCompany } from "@/redux/features/companySlice"
 
 const CompanyCreate = () => {
     const navigate = useNavigate();
@@ -25,19 +26,15 @@ const CompanyCreate = () => {
                 withCredentials:true
             })
             if(res?.data?.success){
-                
-                console.log("🔑🔑🔑🔑", res)
-                dispatch(res?.data?.company);
+                dispatch(setSingleCompany(res?.data?.company));
                 const companyId = res?.data?.company?._id;
-                // toast.success(res.data.message);
-                
+                toast.success(res.data.message);
                 navigate(`/admin/companies/${companyId}`);
             }
         } catch (error) {
             
             console.log(error);
-            // toast.error(error.response.data.message);
-            // toast.error(error);
+            toast.error(error.response.data.message);
         }
     }
   return (
