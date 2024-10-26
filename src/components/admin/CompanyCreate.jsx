@@ -5,9 +5,41 @@ import Navbar from "../shared/Navbar"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
+import axios from "axios"
+import { COMPANY_API_END_POINT } from "@/utils/constant"
+import { useState } from "react"
+import { toast } from "sonner"
+import { useDispatch } from "react-redux"
 
 const CompanyCreate = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [companyName , setCompanyName] = useState();
+
+    const registerNewCompany = async()=>{
+        try {
+            const res = await axios.post(`${COMPANY_API_END_POINT}/register`,{companyName},{
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                withCredentials:true
+            })
+            if(res?.data?.success){
+                
+                console.log("🔑🔑🔑🔑", res)
+                dispatch(res?.data?.company);
+                const companyId = res?.data?.company?._id;
+                // toast.success(res.data.message);
+                
+                navigate(`/admin/companies/${companyId}`);
+            }
+        } catch (error) {
+            
+            console.log(error);
+            // toast.error(error.response.data.message);
+            // toast.error(error);
+        }
+    }
   return (
     <div>
         <Navbar/>
@@ -20,11 +52,12 @@ const CompanyCreate = () => {
             <Input
             type="text"
             className="my-2"
+            onChange={(e)=> setCompanyName(e.target.value)}
             placeholder="jobHunt, Microsoft etc."
             />
             <div className="flex items-center gap-2 my-10">
                 <Button onClick={()=>navigate("/admin/companies")} variant="outline">Cancel</Button>
-                <Button className="bg-black text-white">Continue</Button>
+                <Button onClick={registerNewCompany} className="bg-black text-white">Continue</Button>
             </div>
 
         </div>
