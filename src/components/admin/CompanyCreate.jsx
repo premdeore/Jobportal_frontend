@@ -9,14 +9,13 @@ import axios from "axios"
 import { COMPANY_API_END_POINT } from "@/utils/constant"
 import { useState } from "react"
 import { toast } from "sonner"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setSingleCompany } from "@/redux/features/companySlice"
 
 const CompanyCreate = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [companyName , setCompanyName] = useState();
-    const  {singleCompany} = useSelector(store=>store.company);
 
     const registerNewCompany = async()=>{
         try {
