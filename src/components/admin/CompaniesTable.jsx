@@ -13,9 +13,25 @@ import {
   TableRow,
 } from "../ui/table";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = () => {
-  const { companies } = useSelector((store) => store.company);
+
+  const navigate = useNavigate();
+  const { companies , searchCompanyByText } = useSelector((store) => store.company);
+  const [filterCompany , setFilterCompany] = useState(companies);
+
+  useEffect(()=>{
+    const filteredCompany = companies.length >= 0 && companies.filter((company)=>{
+      if(!searchCompanyByText){
+        return true
+      };
+      return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
+    });
+    setFilterCompany(filteredCompany);
+  },[searchCompanyByText , companies]);
+
   return (
     <div>
       <Table>
@@ -33,7 +49,7 @@ const CompaniesTable = () => {
             <span>You haven&apos;t registered any company yet.</span>
           ) : (
             <> */}
-              {companies?.map((company) => (
+              {filterCompany?.map((company) => (
                 <tr key={company._id}>
                     <TableCell>
                       <Avatar>
@@ -48,7 +64,7 @@ const CompaniesTable = () => {
                           <MoreHorizontal />
                         </PopoverTrigger>
                         <PopoverContent className="w-32">
-                          <div className="flex items-center gap-2 w-fit cursor-pointer">
+                          <div onClick={()=>navigate(`/admin/companies/${company._id}`)} className="flex items-center gap-2 w-fit cursor-pointer">
                             <Edit2 className="w-4" />
                             <span>Edit</span>
                           </div>
