@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <div className="bg-white">
-      <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
+      <div className="flex items-center justify-between mx-auto max-w-7xl h-16 ">
         <div>
           <h1 className="text-2xl font-bold">
             Job<span className="text-[#F83002]">Portal</span>
@@ -81,17 +81,17 @@ const Navbar = () => {
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
-                    src={user?.profile?.profilePhoto}
+                    src={user?.profile?.profilePhoto  || "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="}
                     alt="@shadcn"
                   />
                 </Avatar>
               </PopoverTrigger>
-              <PopoverContent className="w-80">
+              <PopoverContent className="w-80 z-50 bg-white">
                 <div>
                   <div className="flex gap-4 space-y-2">
                     <Avatar className="cursor-pointer">
                       <AvatarImage
-                        src={user?.profile?.profilePhoto}
+                        src={user?.profile?.profilePhoto ||"https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="}
                         alt="@shadcn"
                       />
                     </Avatar>
