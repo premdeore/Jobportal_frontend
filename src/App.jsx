@@ -58,10 +58,9 @@ const appRouter = createBrowserRouter([
 function App() {
 
   return (
-    <>
+    <div className='p-5'>
     <RouterProvider router={appRouter}/>
-      {/* <Navbar/> */}
-    </>
+    </div>
   )
 }
 
