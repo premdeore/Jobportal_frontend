@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { RadioGroup } from "../ui/radio-group";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -23,7 +23,7 @@ const Signup = () => {
         file:""
     })
 
-    const {loading} = useSelector(store=>store.auth);
+    const {loading, user} = useSelector(store=>store.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const changeEventHandler = (e) =>{
@@ -66,6 +66,12 @@ const Signup = () => {
             dispatch(setLoading(false));
         }
     }
+
+    useEffect(()=>{
+      if(user){
+        navigate("/");
+      }
+    },[])
 
   return (
     <div>
